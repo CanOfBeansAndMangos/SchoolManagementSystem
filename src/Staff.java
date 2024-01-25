@@ -9,6 +9,7 @@ public class Staff extends Person
         staffEmployeeId = employeeId;
     }
 
+
     public void ChangeDepartment(String newDepartment)
     {
         staffDepartment = newDepartment;

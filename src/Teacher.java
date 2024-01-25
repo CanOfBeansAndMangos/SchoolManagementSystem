@@ -1,22 +1,21 @@
-import javax.security.auth.Subject;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class Teacher extends Person
+public class Teacher extends Staff
 {
-    ArrayList<String> subjects = new ArrayList<>();
-    public Teacher(String name, int age, String address, String subject)
+    ArrayList<String> subjectsTaught = new ArrayList<>();
+    public Teacher(String name, int age, String address, String subject, String department, int employeeID)
     {
-        super(name, age, address);
-        subjects.add(subject);
+        super(name, age, address, department, employeeID);
+        subjectsTaught.add(subject);
+        super.GetEmployeeId();
     }
     public void addSubject(String subjectToAdd)
     {
-        subjects.add(subjectToAdd);
+        subjectsTaught.add(subjectToAdd);
     }
     public void removeSubject(String subjectToRemove)
     {
-        subjects.remove(subjectToRemove);
+        subjectsTaught.remove(subjectToRemove);
     }
 
 }
