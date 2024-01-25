@@ -26,7 +26,7 @@ public class Person
     {
         return personAddress;
     }
-    
+
     public String displayInfo()
     {
         return personName + " is " + personAge + " years old and lives at " + personAddress;
