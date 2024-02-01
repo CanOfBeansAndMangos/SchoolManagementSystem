@@ -3,9 +3,10 @@ import java.util.ArrayList;
 public class Teacher extends Staff
 {
     ArrayList<String> teacherSubjects = new ArrayList<>();
-    public Teacher(String name, int age, String address, ArrayList<String> subjectsTaught, String department, int employeeID)
+    public Teacher(String name, int age, String address, ArrayList<String> subjectsTaught, int employeeID)
     {
-        super(name, age, address, department, employeeID);
+        // No reason for being able to manually set the department parameter as they are always a teacher
+        super(name, age, address, "Teaching", employeeID);
         teacherSubjects = subjectsTaught;
     }
 
@@ -21,6 +22,6 @@ public class Teacher extends Staff
     @Override
     public String toString() 
     {
-        return super.getPersonName() + ", " + super.getPersonAge() + " is a teacher who teaches the following subjects: " + teacherSubjects.toString();
+        return super.getName() + ". This person is a teacher who teaches the following subjects: " + teacherSubjects.toString();
     }
 }

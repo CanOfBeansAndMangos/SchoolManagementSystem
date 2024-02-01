@@ -9,13 +9,12 @@ public class Staff extends Person
         staffEmployeeId = employeeId;
     }
 
-
-    public void ChangeDepartment(String newDepartment)
+    public void changeDepartment(String newDepartment)
     {
         staffDepartment = newDepartment;
     }
 
-    public int GetEmployeeId()
+    public int getEmployeeId()
     {
         return staffEmployeeId;
     }

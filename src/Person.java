@@ -1,8 +1,8 @@
 public class Person
 {
-    private String personName;
-    private int personAge;
-    private String personAddress;
+    private final String personName;
+    private final int personAge;
+    private final String personAddress;
 
     public Person(String name, int age, String address)
     {
@@ -11,17 +11,17 @@ public class Person
         personAddress = address;
     }
 
-    public String getPersonName()
+    public String getName()
     {
         return personName;
     }
 
-    public int getPersonAge()
+    public int getAge()
     {
         return personAge;
     }
 
-    public String getPersonAddress()
+    public String getAddress()
     {
         return personAddress;
     }

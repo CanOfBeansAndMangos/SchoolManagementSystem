@@ -1,15 +1,59 @@
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class School
 {
     Scanner scanner = new Scanner(System.in);
-
     public ArrayList<Student> studentList = new ArrayList<>();
     public ArrayList<Teacher> teacherList = new ArrayList<>();
     public ArrayList<Staff> staffList = new ArrayList<>();
 
-    public void AddPersonMenu()
+
+    public void schoolMenu()
+    {
+        System.out.println("Welcome to the school management system menu!");
+        System.out.println("What would you like to do?");
+        System.out.println("1. Add a new person to the school");
+        System.out.println("2. View all students in the school");
+        System.out.println("3. View all teachers in the school");
+        System.out.println("4. View all other staff of the school");
+        System.out.println("5. View everyone in the school");
+        System.out.println("6. Quit");
+
+        int choice = 0;
+        while(true)
+        {
+            choice = scanner.nextInt();
+            if (choice == 6) break;
+
+            if (choice <= 5 && choice >= 1)
+            {
+                switch (choice)
+                {
+                    case 1:
+                        addPersonMenu();
+                        break;
+                    case 2:
+                        System.out.println(displayStudents());
+                        break;
+                    case 3:
+                        System.out.println(displayTeachers());
+                        break;
+                    case 4:
+                        System.out.println(displayStaff());
+                        break;
+                    case 5:
+                        System.out.println("Students: \n" + displayStudents());
+                        System.out.println("Teachers: \n" + displayTeachers());
+                        System.out.println("Other Staff: \n" + displayStaff());
+                        break;
+                }
+            }
+        }
+    }
+
+    public void addPersonMenu()
     {
         System.out.println("What type of school person would you like to add to the school?");
         System.out.println("1. Student");
@@ -21,24 +65,25 @@ public class School
             switch(choice)
             {
                 case 1:
-                    CreateNewStudent();
+                    createNewStudent();
                     break;
                 case 2:
-                    CreateNewTeacher();
+                    createNewTeacher();
                     break;
                 case 3:
-                    CreateNewStaff();
+                    createNewStaff();
                     break;
             }
         }
         else
         {
             System.out.println("Please choose a valid input (1-3)!");
-            AddPersonMenu();
+            addPersonMenu();
         }
+        scanner.close();
     }
 
-    private void CreateNewStudent()
+    private void createNewStudent()
     {
         System.out.println("What is their name?");
         String name = scanner.next();
@@ -53,12 +98,12 @@ public class School
         int ID = scanner.nextInt();
 
         System.out.println("What are the classes the student is enrolled in?");
-        System.out.println("(Type \"quit\" to stop adding subjcts)");
+        System.out.println("(Type \"quit\" to stop adding subjects)");
         ArrayList<String> studentClasses = new ArrayList<>();
         while(true)
         {
             String aSubjectTheStudentIsLearning = scanner.next();
-            if(aSubjectTheStudentIsLearning == "quit")
+            if(Objects.equals(aSubjectTheStudentIsLearning, "quit"))
             {
                 break;
             }
@@ -66,32 +111,36 @@ public class School
         }
 
         ArrayList<Integer> grades = new ArrayList<>();
-        for(int i = 0; i < studentClasses.size(); i++)
+        for (String studentClass : studentClasses)
         {
-            System.out.println("Grade for " + studentClasses.get(i));
+            System.out.println("Grade for " + studentClass);
             int gradeForThisClass = scanner.nextInt();
-
             grades.add(gradeForThisClass);
         }
         studentList.add(new Student(age, name, address, ID, grades, studentClasses));
-
     }
-    private void CreateNewStaff()
+
+    private void createNewStaff()
     {
         System.out.println("What is their name?");
         String name = scanner.next();
+
         System.out.println("How Old Are They?");
         int age = scanner.nextInt();
+
         System.out.println("Where do they live?");
         String address = scanner.next();
+
         System.out.println("What department are they in?");
         String department = scanner.next();
+
         System.out.println("What is their employee ID?");
         int ID = scanner.nextInt();
-        System.out.println("What age are they?");
-        staffList.add(new Staff(name, age, address,department, ID));
+
+        staffList.add(new Staff(name, age, address, department, ID));
     }
-    private void CreateNewTeacher()
+
+    private void createNewTeacher()
     {
         System.out.println("What is their name?");
         String name = scanner.next();
@@ -111,27 +160,27 @@ public class School
         while(true)
         {
             String aClassTheTeacherTeaches = scanner.next();
-            if(aClassTheTeacherTeaches == "quit")
+            if(Objects.equals(aClassTheTeacherTeaches, "quit"))
             {
                 break;
             }
             else taughtClasses.add(aClassTheTeacherTeaches);
         }
-        
-        teacherList.add(new Teacher(name, age, address, taughtClasses, "Teacher", employeeId));
+
+        teacherList.add(new Teacher(name, age, address, taughtClasses, employeeId));
     }
 
-    public String DisplayStudents()
+    public String displayStudents()
     {
         return studentList.toString();
     }
 
-    public String DisplayStaff()
+    public String displayStaff()
     {
         return staffList.toString();
     }
 
-    public String DisplayTeachers()
+    public String displayTeachers()
     {
         return teacherList.toString();
     }
