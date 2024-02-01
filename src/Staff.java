@@ -21,8 +21,8 @@ public class Staff extends Person
     }
 
     @Override
-    public String displayInfo()
+    public String toString()
     {
-        return super.displayInfo() + ". This person is a staff who works at " + staffDepartment + ", and has employee id #" + staffEmployeeId;
+        return super.toString() + ". This person is a staff who works at " + staffDepartment + ", and has employee id #" + staffEmployeeId;
     }
 }

@@ -1,5 +1,3 @@
-import java.lang.reflect.Array;
-import java.sql.PseudoColumnUsage;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -97,18 +95,29 @@ public class School
     {
         System.out.println("What is their name?");
         String name = scanner.next();
+
         System.out.println("How Old Are They?");
         int age = scanner.nextInt();
+
         System.out.println("Where do they live?");
         String address = scanner.next();
 
-        System.out.println("What are the subjects they teach?");
-        ArrayList<String> taughtClasses = new ArrayList<>();
-
-        
         System.out.println("What is their employee id?");
         int employeeId = scanner.nextInt();
 
+        System.out.println("What are the subjects they teach?");
+        System.out.println("(Type \"quit\" to stop adding classes)");
+        ArrayList<String> taughtClasses = new ArrayList<>();
+        while(true)
+        {
+            String aClassTheTeacherTeaches = scanner.next();
+            if(aClassTheTeacherTeaches == "quit")
+            {
+                break;
+            }
+            else taughtClasses.add(aClassTheTeacherTeaches);
+        }
+        
         teacherList.add(new Teacher(name, age, address, taughtClasses, "Teacher", employeeId));
     }
 

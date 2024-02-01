@@ -11,7 +11,6 @@ public class Person
         personAddress = address;
     }
 
-
     public String getPersonName()
     {
         return personName;
@@ -27,7 +26,8 @@ public class Person
         return personAddress;
     }
 
-    public String displayInfo()
+    @Override
+    public String toString() 
     {
         return personName + " is " + personAge + " years old and lives at " + personAddress;
     }
