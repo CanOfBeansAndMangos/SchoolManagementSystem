@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.sql.PseudoColumnUsage;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -12,14 +13,11 @@ public class School
 
     public void AddPersonMenu()
     {
-        int choice = 0;
-
-
         System.out.println("What type of school person would you like to add to the school?");
         System.out.println("1. Student");
         System.out.println("2. Teacher");
         System.out.println("3. Staff Member");
-        choice = scanner.nextInt();
+        int choice = scanner.nextInt();
         if(choice <= 3 && choice >= 1 )
         {
             switch(choice)
@@ -35,39 +33,49 @@ public class School
                     break;
             }
         }
+        else
+        {
+            System.out.println("Please choose a valid input (1-3)!");
+            AddPersonMenu();
+        }
     }
 
     private void CreateNewStudent()
     {
         System.out.println("What is their name?");
         String name = scanner.next();
+
         System.out.println("How Old Are They?");
         int age = scanner.nextInt();
+
         System.out.println("Where do they live?");
         String address = scanner.next();
-        System.out.println("What is a subject that they are enrolled in?");
-        String Subject = scanner.next();
-        System.out.println("What is their grade in this subject?");
-
-        int currentGradeInput = 0;
-        ArrayList<Integer> grades = new ArrayList<>();
-        while(true)
-        {
-            currentGradeInput = scanner.nextInt();
-
-            if(currentGradeInput == -1)
-            {
-                break;
-            }
-            else
-            {
-                grades.add(currentGradeInput);
-            }
-        }
 
         System.out.println("What is their student ID?");
         int ID = scanner.nextInt();
-        studentList.add(new Student(age, name, address, ID, grades));
+
+        System.out.println("What are the classes the student is enrolled in?");
+        System.out.println("(Type \"quit\" to stop adding subjcts)");
+        ArrayList<String> studentClasses = new ArrayList<>();
+        while(true)
+        {
+            String aSubjectTheStudentIsLearning = scanner.next();
+            if(aSubjectTheStudentIsLearning == "quit")
+            {
+                break;
+            }
+            else studentClasses.add(aSubjectTheStudentIsLearning);
+        }
+
+        ArrayList<Integer> grades = new ArrayList<>();
+        for(int i = 0; i < studentClasses.size(); i++)
+        {
+            System.out.println("Grade for " + studentClasses.get(i));
+            int gradeForThisClass = scanner.nextInt();
+
+            grades.add(gradeForThisClass);
+        }
+        studentList.add(new Student(age, name, address, ID, grades, studentClasses));
 
     }
     private void CreateNewStaff()
@@ -93,14 +101,15 @@ public class School
         int age = scanner.nextInt();
         System.out.println("Where do they live?");
         String address = scanner.next();
-        System.out.println("What is a subject they teach?");
-        String firstSubjectTaught = scanner.next();
 
-        String department = "Teaching";
+        System.out.println("What are the subjects they teach?");
+        ArrayList<String> taughtClasses = new ArrayList<>();
+
+        
         System.out.println("What is their employee id?");
         int employeeId = scanner.nextInt();
 
-        teacherList.add(new Teacher(name, age, address, firstSubjectTaught, department, employeeId));
+        teacherList.add(new Teacher(name, age, address, taughtClasses, "Teacher", employeeId));
     }
 
     public String DisplayStudents()

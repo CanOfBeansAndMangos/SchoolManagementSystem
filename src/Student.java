@@ -4,29 +4,41 @@ public class Student extends Person
 {
     int studID;
     ArrayList<Integer> grades = new ArrayList<>();
-    int count;
     public ArrayList<String> courses = new ArrayList<>();
 
-    public Student(int age, String name, String address, int ID, ArrayList<Integer> studentGrades)
+    public Student(int age, String name, String address, int ID, ArrayList<Integer> studentGrades, ArrayList<String> enrolledClasses)
     {
         super(name, age, address);
         studID = ID;
         grades = studentGrades;
     }
 
-    public int calculateAverage()
+    public float calculateAverage()
     {
+        float averagedGrades = 0;   // I need to learn why i have to initialise these variables, since it doesn't happen in C#
         for (int grade : grades)
         {
-            count += grade;
+            averagedGrades += grade;
         }
 
-        count /= grades.length;
-        return count;
+        averagedGrades /= grades.size();
+        return averagedGrades;
     }
 
     public void enrollInCourse(String courseName)
     {
         courses.add(courseName);
+    }
+
+    public void dropCourse(String courseToDrop)
+    {
+        for(int i = 0; i < courses.size(); i++)
+        {
+            if(courses.get(i) == courseToDrop)
+            {
+                courses.remove(i);
+                break;
+            }
+        }
     }
 }

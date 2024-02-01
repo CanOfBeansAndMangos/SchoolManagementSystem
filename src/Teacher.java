@@ -2,20 +2,25 @@ import java.util.ArrayList;
 
 public class Teacher extends Staff
 {
-    ArrayList<String> subjectsTaught = new ArrayList<>();
-    public Teacher(String name, int age, String address, String subjectTaught, String department, int employeeID)
+    ArrayList<String> teacherSubjects = new ArrayList<>();
+    public Teacher(String name, int age, String address, ArrayList<String> subjectsTaught, String department, int employeeID)
     {
         super(name, age, address, department, employeeID);
-        subjectsTaught.add(subjectTaught);
-        super.GetEmployeeId();
+        teacherSubjects = subjectsTaught;
     }
+
     public void addSubject(String subjectToAdd)
     {
-        subjectsTaught.add(subjectToAdd);
+        teacherSubjects.add(subjectToAdd);
     }
     public void removeSubject(String subjectToRemove)
     {
-        subjectsTaught.remove(subjectToRemove);
+        teacherSubjects.remove(subjectToRemove);
     }
 
+    @Override
+    public String toString() 
+    {
+        return super.getPersonName() + ", " + super.getPersonAge() + " is a teacher who teaches the following subjects: " + teacherSubjects.toString();
+    }
 }
